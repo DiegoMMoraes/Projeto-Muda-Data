@@ -8,13 +8,20 @@ data = database.strip()
 pasta = input(r'Os arquivos estão em qual diretório? ')
 os.chdir(pasta)
 
-# Renomear Arquivos
+
+
 for arquivo in os.listdir():
-    #Dividide nome em -
-    nomeArquivo = arquivo.split('-')
+    x, extArquivo = os.path.splitext(arquivo)
 
+    #Checa se é um arquivo do Excel e se o nome começa com 2
+    if extArquivo == '.pdf' and arquivo[0] == '2':
 
-    #Cria novo nome
-    novoNome = f'{data} -{nomeArquivo[1]}'
+        #Dividide a data do nome
+        nomeAntigo = arquivo[11:]
 
-    os.rename(arquivo, novoNome)
+        #Cria novo nome
+        novoNome = f'{data} {nomeAntigo}'
+
+        os.rename(arquivo, novoNome)
+        print(f'O arquivo "{arquivo}" foi renomeado para "{novoNome}".')
+
